@@ -22,9 +22,8 @@ set(BLASFEO_TARGET "ARMV8A_ARM_CORTEX_A53" CACHE STRING "BLASFEO Target architec
 set (CMAKE_SYSTEM_PROCESSOR "aarch64"            CACHE STRING "")
 
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3" CACHE STRING "")
-set(CMAKE_C_FLAGS_RELEASE "-O2" CACHE STRING "")
 #defined sections for functions and data (linker can later discard unused functions)
-set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -ffunction-sections -fdata-sections" CACHE STRING "")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -ffunction-sections -fdata-sections" CACHE STRING "")
 
 set (CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER CACHE STRING "")
 set (CMAKE_FIND_ROOT_PATH_MODE_LIBRARY NEVER CACHE STRING "")
@@ -34,10 +33,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 set (CMAKE_C_COMPILER   "${CROSS_PREFIX}gcc" CACHE STRING "")
 set (CMAKE_CXX_COMPILER "${CROSS_PREFIX}g++" CACHE STRING "")
 
-#linker script
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT_PATH}" CACHE STRING "")
-#tell linker to remove unnecessary sections (reduce binary file size)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections" CACHE STRING "")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  -Wl,--gc-sections -T ${LINKER_SCRIPT_PATH}" CACHE STRING "")
 
 set(EMBEDDED_TARGET "XILINX_NONE_ELF" CACHE STRING "Xilinx bare-metal")
 add_definitions(-D__XILINX_NONE_ELF__)
