@@ -27,3 +27,6 @@
 	path = external/osqp
 	url = https://github.com/oxfordcontrol/osqp.git
 	branch = develop
+[submodule "external/jsonlab"]
+	path = external/jsonlab
+	url = https://github.com/fangq/jsonlab.git
