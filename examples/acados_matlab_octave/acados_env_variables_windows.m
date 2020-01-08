@@ -31,27 +31,18 @@
 % POSSIBILITY OF SUCH DAMAGE.;
 %
 
-classdef acados_dae < handle
-    properties
-        f_impl_expr
-        f_expl_expr
-        x
-        xdot
-        u
-        z
-        name
-        p
-    end
-    methods
-        function obj = acados_dae()
-            obj.f_impl_expr = [];
-            obj.f_expl_expr = [];
-            obj.x = [];
-            obj.xdot = [];
-            obj.u = [];
-            obj.z = [];
-            obj.name = [];
-            obj.p = [];
-        end
-    end
-end
+
+example_dir = fileparts(which('acados_env_variables_windows'));
+
+acados_dir = fullfile(example_dir, '..', '..');
+casadi_dir = fullfile(acados_dir, 'external', 'casadi-matlab');
+matlab_interface_dir = fullfile(acados_dir, 'interfaces', 'acados_matlab_octave');
+mex_template_dir = fullfile(matlab_interface_dir, 'acados_template_mex');
+
+addpath(matlab_interface_dir);
+addpath(mex_template_dir);
+addpath(casadi_dir);
+
+setenv('ACADOS_INSTALL_DIR', acados_dir);
+setenv('ENV_RUN', 'true');
+
